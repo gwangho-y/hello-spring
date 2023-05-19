@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
@@ -19,4 +20,29 @@ public class HelloController {
         model.addAttribute("name", name);
         return "hello-mvc";
     }
+
+    @GetMapping("hello-string")
+    @ResponseBody //http에서 body 부에 return 하는 값을 넣을 수 있게 해주는 것.
+    public String helloString(@RequestParam(value = "name", required = false) String name) {
+        return "hello " + name;// hello spring
+    }
+
+    @GetMapping("hello-api")
+    @ResponseBody
+    public Hello helloApi(@RequestParam("name") String name) { // String이 아니라 Hello 라는 클래스 타입을 돌려준다
+        Hello hello = new Hello();
+        hello.setName(name);
+        return hello;
+    }
+
+    static class Hello {
+        private String name;
+        public String getName() {
+            return name;
+        }
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
 }
