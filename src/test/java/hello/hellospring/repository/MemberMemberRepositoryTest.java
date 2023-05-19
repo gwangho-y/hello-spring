@@ -1,7 +1,6 @@
 package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class MemberMemberRepositoryTest {
-    MemberMemberRepository repository = new MemberMemberRepository();
+    MemoryMemberRepository repository = new MemoryMemberRepository();
 
     // 테스트 메서드들은 순서가 서로 보장이 되지 않아서 똑같은 이름의 객체를 저장시키고 같은 결과를 보장 받을 수 없다.
     @AfterEach // 메서드가 하나씩 실행 된 후에 반드시 한 번씩은 실행시킨다.
