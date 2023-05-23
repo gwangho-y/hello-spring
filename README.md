@@ -1,7 +1,7 @@
 # hello-spring
 스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술
 
-
+* 생성자가 하나일 때는 @Autowired 생략 가능하다
 
 # 19 강 JDBC
 MemberService -> MemberRepository -> MemoryMemberRepository
@@ -24,3 +24,5 @@ MemberService -> MemberRepository -> JdbcMemberRepository
 @Commit : 선언된 메서드의 트랜잭션을 반드시 수행 완료 시킨다.
 
 DB까지 연동하는걸 보통 통합 테스트라고 하는데, 가급적이면 스프링 컨테이너 없는 순수한 단위 테스트가 훨씬 좋은 테스트일 확률이 높다고 하시더라.
+
+
