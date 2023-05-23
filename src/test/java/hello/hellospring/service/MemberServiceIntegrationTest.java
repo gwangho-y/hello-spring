@@ -2,33 +2,24 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MemberServiceTest {
+@SpringBootTest
+@Transactional // 테스트 시 insert 한 DB에 있는 내용들을 롤백해준다
+class MemberServiceIntegrationTest {
+    // 테스트이기 때문에 필드 주입으로 한다
+    @Autowired MemberRepository memberRepository;
 
+    @Autowired MemberService memberService;
 
-    MemoryMemberRepository repository;
-
-    MemberService memberService;
-
-
-    @BeforeEach
-    public void beforeEach() {
-        repository = new MemoryMemberRepository();
-        memberService = new MemberService(repository);
-    }
-
-    @AfterEach
-    public void afterEach() {
-        repository.clearStore();
-    }
 
     @Test
     void 회원가입() {
