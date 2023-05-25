@@ -42,7 +42,6 @@ class MemberServiceIntegrationTest {
         Member member2 = new Member();
         member2.setName("spring");
 
-
         // when
         memberService.join(member1);
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2)); // 오른쪽 람다식을 실행할 것이고, 왼쪽 에러가 뜰것이다.
