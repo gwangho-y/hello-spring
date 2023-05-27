@@ -12,8 +12,7 @@ import java.util.Optional;
 
 @Transactional // jpa는 join 메서드 안에 있는 모든 변경이 트랜잭션 안에서 실행 되야한다.
 public class MemberService {
-
-
+    
     private final MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {
@@ -22,9 +21,20 @@ public class MemberService {
 
     // 회원 가입
     public Long join(Member member) {
-        validateDuplicateMember(member); // 중복회원 검증
-        memberRepository.save(member);
-        return member.getId();
+
+        long start = System.currentTimeMillis();
+
+        try {
+            validateDuplicateMember(member); // 중복회원 검증
+            memberRepository.save(member);
+            return member.getId();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
+
+
     }
 
     private void validateDuplicateMember(Member member) {
