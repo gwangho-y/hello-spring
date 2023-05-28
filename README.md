@@ -43,3 +43,12 @@ join 메서드에 System.currentTimeMillis() 로 시간을 측정해서 출력�
 - 시간을 측정하는 로직을 변경할 때 모든 로직을 찾아가면서 변경해야 한다.
 
 # 25 강 AOP 적용
+
+TimeTraceAop 라는 클래스를 만들고
+@Around("execution(* hello.hellospring.service..*(..))")로 서비스 패키지의 메서드 전체에 joint 시켜 시간 측정 기능을 구현했다.
+- AOP 적용 전, 스프링 컨테이너에서 컨트롤러 서비스 의존 관계
+  helloController ---> memberService
+- AOP 적용 후, 컨트롤러 서비스 의존 관계
+  helloController ---> memberService(프록시) ---> memberService(실제)
+
+AOP 가 적용이 되어 있다면 가짜 memberService를 만들어서 호출을 하고, joinPoint.proceed()를 만났을 때, 실제 memberService를 호출한다
